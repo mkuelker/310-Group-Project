@@ -1,5 +1,6 @@
 import search_json
 import syn_detection
+import api_scripts 
 from data_utils.data_load import get_query_objects
 from spellchecker import SpellChecker
 import random
@@ -58,11 +59,20 @@ def get_response(query):
         if greeting in query.lower().split():
             return "Hi! Great to meet you. Are you going to ask me some questions?"
     query_objects = get_query_objects(query)
-    if query_objects is None:
-        return responses[random.randint(0, len(responses) - 1)]
-
-    else:
-        response = search_json.search_noun_quest(query_objects[0], query_objects[1])
+    #purge = ["on","in","up"] + query_objects
+    #for item in purge:
+    #    query = query.replace(item,"")
+    #if bot doesn't recognize it
+    #if query_objects is None:
+    #    return responses[random.randint(0, len(responses) - 1)]
+    #if bot does. 
+    #else:
+    #    if query_objects[0] == "wikipedia":
+    #        response = api_scripts.wiki_response(query) 
+    #    elif  query_objects[0] == "directions":
+    #        response = api_scripts.get_directions(query)
+    #    else:
+    #        response = search_json.search_noun_quest(query_objects[0], query_objects[1])
     # for obj in query_objects:
     #
     #     if obj in entity_dict:
@@ -71,4 +81,5 @@ def get_response(query):
     #         # Satisfies 5 possible responses for out of topic questions
     #         return responses[random.randint(0, len(responses))]
 
-    return " ".join(response)
+    return query_objects #response
+

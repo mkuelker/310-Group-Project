@@ -127,5 +127,15 @@
         "where": "Monsters are everywhere! Have you seen gas prices these days? Truly monstrous...",
         "find": "I will pack some flashlights in case we find some monsters!",
         "fight": "You look strong enough, I'm sure we'll be fine!"
+    },
+    "wikipedia": {
+        "search" : "",
+        "locate" : "",
+        "find" : "",
+        "look" : ""
+    },
+    "directions": {
+        "to" : "",
+        "for": ""
     }
 }
