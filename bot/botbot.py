@@ -59,27 +59,22 @@ def get_response(query):
         if greeting in query.lower().split():
             return "Hi! Great to meet you. Are you going to ask me some questions?"
     query_objects = get_query_objects(query)
-    #purge = ["on","in","up"] + query_objects
-    #for item in purge:
-    #    query = query.replace(item,"")
-    #if bot doesn't recognize it
-    #if query_objects is None:
-    #    return responses[random.randint(0, len(responses) - 1)]
-    #if bot does. 
-    #else:
-    #    if query_objects[0] == "wikipedia":
-    #        response = api_scripts.wiki_response(query) 
-    #    elif  query_objects[0] == "directions":
-    #        response = api_scripts.get_directions(query)
-    #    else:
-    #        response = search_json.search_noun_quest(query_objects[0], query_objects[1])
-    # for obj in query_objects:
-    #
-    #     if obj in entity_dict:
-    #         response.append(entity_dict[obj])
-    #     else:
-    #         # Satisfies 5 possible responses for out of topic questions
-    #         return responses[random.randint(0, len(responses))]
+    if query_objects is None:
+        if api_scripts.check_if_directions(query):
+            query = api_scripts.nnp_extract(query)
+            return api_scripts.get_directions(query)
+        else:
+            return responses[random.randint(0, len(responses) - 1)]
+    else:
+        if query_objects[0] == "wikipedia":
+            purge = ["on","in","up"] + query_objects
+            for item in purge:
+                query = query.replace(item,"")
+            response = api_scripts.wiki_response(query.strip()) 
+        else:
+            query = spell_check(query)
+            query_objects = get_query_objects(query)
+            response = search_json.search_noun_quest(query_objects[0], query_objects[1])
 
-    return query_objects #response
+    return response
 

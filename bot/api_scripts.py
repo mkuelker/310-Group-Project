@@ -1,9 +1,13 @@
 import requests
 import googlemaps
 import geocoder
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.corpus import stopwords
 from urllib.parse import urlencode
 from datetime import datetime
-api_key = "AIzaSyCuHDX4fYSfrvMNIngrRfXMXmQkMNAQcSM"
+api_key = "YOUR API KEY HERE" 
 gmaps = googlemaps.Client(key=api_key)
 
 def wiki_response(subject):
@@ -20,9 +24,10 @@ def wiki_response(subject):
     response = requests.get(url, params=params)
     data = response.json()
     page = next(iter(data['query']['pages'].values()))
-    text = str(page['extract'][:150]).replace('\n',"") + "..."
-    if text == "...":
-        text = "No information found. Try capitalizing letters or checking your spelling"
+    try:
+        text = str(page['extract'][:150]).replace('\n',"") + "..."
+    except:
+        text = "Sorry, no information found!, Check capitalization and spelling!"
     return text
 
 def get_latlng():
@@ -46,6 +51,7 @@ def get_directions(destination):
         directions_result = gmaps.directions(get_address(),destination,mode="driving", departure_time=now)
     except:
         return "no suitable directions found"
+    
     #this is hacky but it works. 
     i = 0;  
     purge = ['<b>','</b>','<wbr/>','<div style="font-size:0.9em">','</div>','<br>']
@@ -67,9 +73,27 @@ def check_if_directions(query):
     for word in str_approved:
         if word in query:
             i += 1
-            print(word)
-    print(i)
     if i > 1: return True;
     else: return False;
 
-check_if_directions("directions to home")
+#uses fancy pants POS tagging extract an address. 
+def nnp_extract(query):
+    sentences = nltk.sent_tokenize(query)
+    text = ""
+    for sentence in sentences:
+        words = nltk.word_tokenize(sentence)
+        words = [word for word in words if word not in set(stopwords.words('english'))]
+        tagged = nltk.pos_tag(words)
+        for (word, tag) in tagged:
+            if tag == 'NNP' or tag == "CD": # If the word is a proper noun 
+                text += word + " "
+    return text
+
+#query = "directions to Ohio"
+#if check_if_directions(query):
+#    query = nnp_extract(query)
+#    print(get_directions(query))
+
+
+
+#wiki_response(item)
