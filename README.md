@@ -211,7 +211,7 @@ In order to better suit the keyword style bot that we have created, we needed to
 This API was used to provide text exerpts for the bot. More details can be found in `get_response` in `api_scripts.py`
 
 ### Google Geocode
-This API was used to provide an address after an IP address's longitude and latitude was found. More details can be found in `get_directions` in `api_scripts.py`
+This API was used to provide an address after an IP address's longitude and latitude was found. More details can be found in `get_address` in `api_scripts.py`
 
 ### Google Places 
 This API was used to generate directions to destinations. More details can be found in `get_directions` in `api_scripts.py`
