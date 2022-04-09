@@ -1,6 +1,6 @@
-#import stanza
+import stanza
 import nltk
-#print('executing py_lib_install.py')
-#stanza.download('en')
+print('executing py_lib_install.py')
+stanza.download('en')
 nltk.download()
-#print("install complete")
+print("install complete")

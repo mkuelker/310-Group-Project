@@ -52,7 +52,7 @@ def get_directions(destination):
     except:
         return "no suitable directions found"
     
-    #this is hacky but it works. 
+    #this is hacky but it works.  
     i = 0;  
     purge = ['<b>','</b>','<wbr/>','<div style="font-size:0.9em">','</div>','<br>']
     results = ""
@@ -89,10 +89,10 @@ def nnp_extract(query):
                 text += word + " "
     return text
 
-#query = "directions to Ohio"
-#if check_if_directions(query):
-#    query = nnp_extract(query)
-#    print(get_directions(query))
+query = "directions to Ohio"
+if check_if_directions(query):
+    query = nnp_extract(query)
+    print(get_directions(query))
 
 
 
