@@ -172,7 +172,7 @@ Returns:
  - text : a string containing 150 characters of information, or a string returning a not-found style message to the user. 
 
 #### get_latling
-returns a string of latitude and longitude associated with users IP address. It won't work if you're using a VPN. 
+returns a string of latitude and longitude associated with users IP address. It won't work as intended if you're using a VPN. 
 
 #### get_address
 uses `get_latling` method and performs a reverse geo lookup in order to get the name of the address associated with your IP address. 
@@ -194,7 +194,7 @@ Parameters
 
 Returns either true or false. 
 
-### nnp_extract
+#### nnp_extract
 Uses fancy pants POS tagging extract an address
 
 Parameters
