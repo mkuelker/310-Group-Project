@@ -159,3 +159,47 @@ Synonym detection was used in our chatbot in order to improve the greeting funct
 ### POS Tagging, Tokenization & Segmentation
 
 In order to better suit the keyword style bot that we have created, we needed to implement a way of understanding sentences that were input, and extract the necessary information required to generate a query that the bot can use to get a response. To do this, we used POS tagging, tokenization, and segmentation. These systems work together to process questions asked, and provide us with a query in the form of \<Noun\> \<Descriptor\> which we use to generate much more intricate and conversational dialogue.
+
+### api_scripts.py
+
+#### wiki_response
+takes a string and uses wikipedia API to search and retrieve an excerpt if found on wikipedia
+
+Parameters
+ - subject: a string 
+
+Returns:
+ - text : a string containing 150 characters of information, or a string returning a not-found style message to the user. 
+
+#### get_latling
+returns a string of latitude and longitude associated with users IP address. It won't work if you're using a VPN. 
+
+#### get_address
+uses `get_latling` method and performs a reverse geo lookup in order to get the name of the address associated with your IP address. 
+
+####  get_directions
+uses `get_address` to provide a starting address and then takes user input. It then makes a request to places API. If failure it returns no suitable directions found, if success it returns a list of instructions to navigate to the following location. 
+
+Parameters:
+ - destination: a string of where the users wishes to go
+
+Returns:
+- results: a list of directions, or a string indicating no suitable directions where found. 
+
+#### check_if_directions
+Uses a naive aproach to check a string is meant to be a list of directions. 
+
+Parameters
+ - query: a string 
+
+Returns either true or false. 
+
+### nnp_extract
+Uses fancy pants POS tagging extract an address
+
+Parameters
+- query: a string meant to be extracted from
+
+Returns
+ - text: a string containing address
+
