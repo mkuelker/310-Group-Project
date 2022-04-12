@@ -69,10 +69,12 @@ def get_response(query):
             
     else:
         if query_objects[0] == "wikipedia":
-            purge = ["on","in","up"] + query_objects
+            purge = ["on","in","up", "for"] + query_objects
             for item in purge:
-                query = query.replace(item,"")
+                query = query.replace(item," ")
+            print(query)
             response = api_scripts.wiki_response(query.strip()) 
+            print(response)
         else:
             query = spell_check(query)
             query_objects = get_query_objects(query)
