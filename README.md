@@ -10,6 +10,7 @@ Our project is going to be an interactive chatbot that takes on the role of a wo
 2. Open the repo using VSCode or Terminal 
 3. run `run_me_first.sh` (If you are uncomfortable running a bash script refer to dependencies.) 
 4. Run gui.py 
+5. Insert google API key in `api_key = "YOUR API KEY HERE"` 
 
 ## Dependencies
 This bot requires nltk, pyspechecker, and stanza in order to run properly. If you do not run first-time-setup.sh you will have to do the following
